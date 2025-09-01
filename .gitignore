@@ -1,0 +1,9 @@
+# Ignore any Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Ignore any folder ending with _venv (e.g. .myproject_venv/)
+*_venv/
+.*_venv/
