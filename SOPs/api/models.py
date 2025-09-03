@@ -18,8 +18,8 @@ class SOP(models.Model):
 
     name = models.CharField(max_length=200)
     link = models.URLField()
-    company = models.CharField(max_length=10, choices=COMPANY_CHOICES)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="sops")
+    company = models.CharField(max_length=10, choices=COMPANY_CHOICES,blank=True, null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="sops", blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="created_sops")
     created_at = models.DateTimeField(auto_now_add=True)
 
