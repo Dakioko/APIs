@@ -1,0 +1,19 @@
+#pull base image
+FROM python:3.13-slim-bullseye
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# set work directory
+WORKDIR /SOPS_V1
+
+# install dependencies
+COPY ./requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# copy project
+COPY . . 
+
