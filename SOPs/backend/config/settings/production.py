@@ -2,7 +2,7 @@ from .base import *
 from decouple import config
 
 # Debug mode OFF for production
-DEBUG = config("DEBUG", default=False, cast=bool)
+DEBUG = False
 
 # Hosts allowed in production (must be set in .env)
 ALLOWED_HOSTS = config(
