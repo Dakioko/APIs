@@ -2,11 +2,11 @@ from .base import *
 from decouple import config
 
 # Debug mode ON for development
-DEBUG = config("DEBUG", default=True, cast=bool)
+DEBUG = True
 
 # Hosts allowed in development
 ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS",
+    "SOPs_ALLOWED_HOSTS",
     default="localhost,127.0.0.1",
     cast=lambda v: [s.strip() for s in v.split(",")],
 )
@@ -18,7 +18,7 @@ CORS_ALLOW_CREDENTIALS = True
 # Email backend (prints emails to console in dev)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# Verbose logging for development
+# Hide all logs except CRITICAL
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -29,18 +29,23 @@ LOGGING = {
     },
     "root": {
         "handlers": ["console"],
-        "level": "DEBUG",
+        "level": "CRITICAL",
     },
     "loggers": {
-        # Show SQL queries in console
+        "django": {
+            "handlers": ["console"],
+            "level": "CRITICAL",
+            "propagate": False,
+        },
         "django.db.backends": {
             "handlers": ["console"],
-            "level": "DEBUG",
+            "level": "CRITICAL",
+            "propagate": False,
         },
-        # Show Django security warnings
         "django.security": {
             "handlers": ["console"],
-            "level": "WARNING",
+            "level": "CRITICAL",
+            "propagate": False,
         },
     },
 }
